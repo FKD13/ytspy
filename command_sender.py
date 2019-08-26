@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/env python3
 # the fifo used to send commands to mpv
 from os import *
 

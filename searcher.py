@@ -1,6 +1,7 @@
-#!/bin/python3
+#!/usr/bin/env python3
 from urllib import request
 from typing import List, Dict
+from printer import *
 
 
 class Searcher:
@@ -15,10 +16,11 @@ class Searcher:
         for line in content:
             if line.startswith('<a href="/watch') and len(line.split('"')[1]) == 20:
                 link = line.split('"')
-                self._results.append({
-                    "url": 'https://www.youtube.com' + link[1],
-                    "title": link[7]
-                })
+                if len(link) >= 8:
+                    self._results.append({
+                        "url": 'https://www.youtube.com' + link[1],
+                        "title": link[7]
+                    })
         self.print_results()
 
     def get_results(self) -> List[str]:
@@ -26,4 +28,4 @@ class Searcher:
 
     def print_results(self) -> None:
         for i, vid in enumerate(self._results):
-            print(f'[{i}] {vid["title"]}')
+            Printer.print(f'{Fore.YELLOW}[{Fore.GREEN}{i}{Fore.YELLOW}] {Fore.WHITE}{vid["title"]}')

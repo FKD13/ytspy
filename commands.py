@@ -1,6 +1,8 @@
-#!/bin/python3
+#!/usr/bin/env python3
 from searcher import *
 from command_sender import *
+from printer import *
+from colorama import *
 
 
 class Command:
@@ -16,7 +18,7 @@ class SearchCmd(Command):
         if args is not None:
             self.searcher.search(args)
         else:
-            print("[search] You have to pass arguments")
+            Printer.print(f"{Fore.RED}[search] You have to pass arguments")
 
 
 class ListCmd(Command):
@@ -36,7 +38,7 @@ class PlayCmd(Command):
         if len(args) == 1 and args[0].isnumeric() and 0 <= int(args[0]) < len(search_results):
             CommandSender.send(f"loadfile {search_results[int(args[0])]} append-play")
         else:
-            print(f'[play] Usage: play [0 <= number <= {len(search_results)}]')
+            Printer.print(f'{Fore.RED}[play] Usage: play [0 <= number <= {len(search_results)}]')
 
 
 class SkipCmd(Command):

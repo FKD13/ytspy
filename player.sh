@@ -20,7 +20,7 @@ fi
 mpv $VIDEO --force-window=yes --input-file=music.fifo --idle > mpv.log 2>&1 &
 
 # Grab the mpv process so we can kill it later
-PROCESS=$(ps | grep 'mpv' | sed -E 's/^ *([0-9]+) .*$/\1/')
+PROCESS=$(pgrep mpv)
 
 # Start the music searcher
 ./main.py
