@@ -7,7 +7,7 @@ then
 fi
 
 # Create a new mpv process that runs in backgound
-mpv --input-file=music.fifo --idle > mpv.log 2>&1 &
+mpv --force-window=yes --input-file=music.fifo --idle > mpv.log 2>&1 &
 
 # Grab the mpv process so we can kill it later
 PROCESS=$(ps | grep 'mpv' | sed -E 's/^ *([0-9]+) .*$/\1/')
