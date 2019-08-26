@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# Enter venv
+source venv/bin/activate
+
 # Make sure music.fifo exists
 if [[ ! -e music.fifo ]]
 then
@@ -24,6 +27,9 @@ PROCESS=$(ps | grep 'mpv' | sed -E 's/^ *([0-9]+) .*$/\1/')
 
 # Kill the mpv process
 kill $PROCESS
+
+# Exit venv
+deactivate
 
 # Exit ok
 exit 0
