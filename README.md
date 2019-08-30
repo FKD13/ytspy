@@ -8,6 +8,7 @@ You will need:
 - `pip3`.
 - a Unix Machine running bash.
 - `mpv` installed and in your PATH
+- `youtube-dl` installed and in your PATH
 
 ## Installation
 
