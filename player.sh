@@ -17,7 +17,7 @@ then
 fi
 
 # Create a new mpv process that runs in backgound
-mpv $VIDEO --force-window=yes --input-file=music.fifo --idle > mpv.log 2>&1 &
+mpv $VIDEO --vo=x11 --force-window=yes --input-file=music.fifo --idle > mpv.log 2>&1 &
 
 # Grab the mpv process so we can kill it later
 PROCESS=$(pgrep mpv)
