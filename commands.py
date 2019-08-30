@@ -3,6 +3,7 @@ from searcher import *
 from command_sender import *
 from printer import *
 from colorama import *
+from re import match
 
 
 class Command:
@@ -33,12 +34,29 @@ class PlayCmd(Command):
     def __init__(self, searcher: Searcher):
         self.searcher = searcher
 
+    def parse_to_range(self, interval: str) -> List[int]:
+        if match('[0-9]+-[0-9]', interval):
+            interval = interval.split('-')
+            num1 = interval[0]
+            num2 = interval[1]
+            if not num1.isnumeric() or not num2.isnumeric():
+                Printer.print(f"{Fore.RED}[Play] Usage: play [interval: 0-12]... [separate numbers]...")
+                return []
+            return [i for i in range(int(num1), int(num2) + 1)]
+        elif interval.isnumeric():
+            return [int(interval)]
+        return []
+
     def execute_command(self, args: List[str]) -> None:
         search_results = self.searcher.get_results()
-        if len(args) == 1 and args[0].isnumeric() and 0 <= int(args[0]) < len(search_results):
-            CommandSender.send(f"loadfile {search_results[int(args[0])]} append-play")
-        else:
-            Printer.print(f'{Fore.RED}[play] Usage: play [0 <= number <= {len(search_results)}]')
+        numbers = []
+        for arg in args:
+            numbers += self.parse_to_range(arg)
+        for number in numbers:
+            if 0 <= number <= len(search_results):
+                CommandSender.send(f"loadfile {search_results[number]} append-play")
+            else:
+                Printer.print(f"{Fore.RED}[Play] could not find song {number}")
 
 
 class SkipCmd(Command):
