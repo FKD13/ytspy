@@ -65,3 +65,4 @@ When in the player you can use following commands:
 - `list` list a search results.
 - `skip` skip a song.
 - `q` or `quit` quit.
+
