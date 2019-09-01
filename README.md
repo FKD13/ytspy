@@ -61,7 +61,7 @@ with `options`:
 When in the player you can use following commands:
 
 - `search [search-term]` search for a term, returns a list with id's.
-- `play [id]` add a video to playlist using the id generated in the search cmd.
+- `play [id] [range] [id] ...` add a video to playlist using the id generated in the search cmd.
 - `list` list a search results.
 - `skip` skip a song.
 - `q` or `quit` quit.
